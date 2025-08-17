@@ -1,7 +1,12 @@
 from fastapi import FastAPI
+from pydantic import BaseModel
+
+class Password(BaseModel):
+    password: str
+
 
 app = FastAPI()
 
-@app.get("/")
-def read_root():
-    return {"message": "Hello World"}
+@app.post("/check")
+def read_root(password: Password):
+    return {"message": password}
