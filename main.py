@@ -1,12 +1,13 @@
 from fastapi import FastAPI
-from pydantic import BaseModel
-
-class Password(BaseModel):
-    password: str
-
+from schemas import Password
+from checker import check_password
 
 app = FastAPI()
 
+
 @app.post("/check")
 def read_root(password: Password):
-    return {"message": password}
+    check = check_password(password.password)
+    if check: message = "Password is safe"
+    else: message = "Password is unsafe"
+    return {"Result": message}
