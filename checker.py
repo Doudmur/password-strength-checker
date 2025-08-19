@@ -46,8 +46,7 @@ specials = r"!#$%&'()*+,-./:;<=>?@[\]^_`{|}\"~"
 rockyou = load_rockyou()
 
 def check_password(password: str) -> (bool, float, string):
-    entropy = password_entropy(password)
-    entropy_rank = ""
+    entropy = math.floor(password_entropy(password))
     if entropy < 28: entropy_rank = "Very weak"
     elif 28 <= entropy <= 35: entropy_rank = "Weak"
     elif 36 <= entropy <= 59: entropy_rank = "Reasonable"
